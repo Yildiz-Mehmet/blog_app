@@ -11,11 +11,16 @@ function CreatePost({ isAuth }) {
   let navigate = useNavigate();
 
   const createPost = async () => {
-    await addDoc(postsCollectionRef, {
-      title,
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-    });
+    title &&
+      postText &&
+      (await addDoc(postsCollectionRef, {
+        title,
+        postText,
+        author: {
+          name: auth.currentUser.displayName,
+          id: auth.currentUser.uid,
+        },
+      }));
     navigate("/");
   };
 
